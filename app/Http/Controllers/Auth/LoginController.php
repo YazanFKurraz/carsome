@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -41,11 +42,18 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
         if($user->hasRole(['superadministrator', 'dealer'])){
             return redirect()->route('dashboard');
         }
         if($user->hasRole('user')){
             return redirect()->route('home');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
     }
 }

@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 //saidi is here
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
 
 Auth::routes();
 
@@ -103,5 +103,10 @@ Route::group(['prefix' => 'home', 'middleware' => ['role:superadministrator|user
 });
 
 
+//logout
+Route::get('/logout','Auth\LoginController@logout')->name('log-out');
+// front view
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/','HomeController@index')->name('home');
+Route::get('/home','HomeController@index')->name('home');
+
