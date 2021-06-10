@@ -51,6 +51,7 @@
                     </ul>
                 </li>
             @endif
+            @if(auth()->user()->hasRole(['superadministrator','administrator', 'dealer']))
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-info"></i>
@@ -79,11 +80,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-car"></i>
-
-                    <p>
-                        Car
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
+                    <p>Car<i class="fas fa-angle-left right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
@@ -94,8 +91,35 @@
                     </li>
                 </ul>
             </li>
+            @endif
+            @if(auth()->user()->hasRole(['superadministrator','administrator', 'checkup']))
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cogs"></i>
+                        <p>Checkups<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.checkups')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Checkups</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
 
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                    <p style="color: #9D1E15">{{ __('Logout') }}</p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
         </ul>
     </nav>
     <!-- /.sidebar-menu -->

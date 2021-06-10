@@ -8,19 +8,42 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Image;
 use App\Models\Model_Car;
+use App\Notifications\AddCarByUser;
+use App\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class CarController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:delete-car')->only('destroy');
+        $this->middleware('permission:notifications')->only('notificationList');
+    }
+
     public function index()
     {
-        $cars = Car::with('model', 'brand')->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
-//        return $cars;
-        return view('admin.cars.index', compact('cars'));
+        if (auth()->user()->hasRole(['superadministrator', 'administrator'])) {
+
+            $cars = Car::with('model', 'brand')
+                ->orderBy('id', 'DESC')
+                ->paginate(PAGINATION_COUNT);
+            return view('admin.cars.index', compact('cars'));
+
+        } elseif (auth()->user()->hasRole('dealer')) {
+
+            $cars = Car::with('model', 'brand')
+                ->where('user_id', auth()->user()->id)
+                ->orderBy('id', 'DESC')
+                ->paginate(PAGINATION_COUNT);
+
+            return view('admin.cars.index', compact('cars'));
+        }
+
     }
 
     public function showDetails($id)
@@ -36,10 +59,6 @@ class CarController extends Controller
     public function create()
     {
         $brands = Brand::active()->get();
-
-//        $models_car = Model_Car::active()->get();
-//        return view('admin.cars.create', compact('brands', 'models_car'));
-
         return view('admin.cars.create', compact('brands'));
 
     }
@@ -74,16 +93,27 @@ class CarController extends Controller
     public function store(CarRequest $request)
     {
         try {
-            //check active
-            if (!$request->has('is_active'))
-                $request->request->add(['is_active' => 0]);
-            else
-                $request->request->add(['is_active' => 1]);
+        //check active
+        if (!$request->has('is_active'))
+            $request->request->add(['is_active' => 0]);
+        else
+            $request->request->add(['is_active' => 1]);
 
-            //save brand in DB
-            $car = Car::create($request->all());
+        //save brand in DB
+        $car = Car::create($request->all());
 
-            return redirect()->route('admin.cars')->with(['success' => __('Success Save')]);
+        // condition just user has role dealer and user
+        if (auth()->user()->hasRole(['dealer', 'user'])) {
+            $user = User::get();
+            // get at last create car
+            $car = Car::latest()->first();
+            //send notifiction and save to details in method to database in class AddCarByUser
+            // constractor id car $car
+            Notification::send($user, new AddCarByUser($car));
+        }
+
+
+        return redirect()->route('admin.cars')->with(['success' => __('Success Save')]);
 
         } catch (Exception $ex) {
 
@@ -100,7 +130,7 @@ class CarController extends Controller
             Car::whereId($request->car_id)->update(
                 $request->only(
                     ['manufactured', 'fuel_type', 'seat', 'registration_type',
-                        'engine_capacity', 'transmission', 'color', 'current-mileage']
+                        'engine_capacity', 'transmission', 'color', 'current_mileage', 'description']
                 ));
 
             //save brand in DB
@@ -221,4 +251,7 @@ class CarController extends Controller
 
         }
     }
+
+
+
 }

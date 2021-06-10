@@ -1,12 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use Exception;
 
 class BrandController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:delete-brand')->only('destroy');
+    }
+
 
     public function index()
     {

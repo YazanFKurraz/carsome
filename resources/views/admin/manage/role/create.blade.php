@@ -59,26 +59,26 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h2>Permissions:</h2>
-                                <div class="form-check">
-                                    <div class="row">
-                                        @foreach($permissions as $permission)
-                                            <div class="col-md-3">
-                                                <label for="form-check-label">
-                                                    <input type="checkbox" class="form-checkbox-input"
-                                                           name="permissionsSelected[]" value="{{$permission->id}}">
-                                                    <em>{{($permission->display_name)}}</em>
-                                                </label>
-                                            </div>
-                                        @endforeach
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2>Permissions:</h2>
+                                    <div class="form-check">
+                                        <div class="row">
+                                            @foreach($permissions as $permission)
+                                                <div class="col-md-3">
+                                                    <label for="form-check-label">
+                                                        <input type="checkbox" class="form-checkbox-input"
+                                                               name="permissionsSelected[]" value="{{$permission->id}}">
+                                                        <em>{{($permission->display_name)}}</em>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br>
-                        <button class="btn btn-primary">Create role</button>
+                            <br>
+                            <button class="btn btn-primary">Create role</button>
                     </form>
                 </div>
             </div>

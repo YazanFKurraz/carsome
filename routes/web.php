@@ -21,11 +21,14 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator|dealer']], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator|dealer|administrator|checkup']], function () {
 
     Route::get('/', 'AdminController@index')->name('dashboard');
-    Route::group(['prefix' => 'mange'], function () {
+
+    Route::group(['prefix' => 'mange', 'middleware' => ['role:superadministrator|administrator']], function () {
+
         Route::group(['prefix' => 'user'], function () {
+
             Route::get('/', 'AdminController@indexUser')->name('admin.users');
             Route::get('create', 'AdminController@createUser')->name('admin.user.create');
             Route::post('store', 'AdminController@storeUser')->name('admin.user.store');
@@ -37,6 +40,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
         });
 
         Route::group(['prefix' => 'permission'], function () {
+
             Route::get('/', 'AdminController@indexPermission')->name('admin.permissions');
             Route::get('create', 'AdminController@createPermission')->name('admin.permission.create');
             Route::post('store', 'AdminController@storePermission')->name('admin.permission.store');
@@ -47,6 +51,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
         });
 
         Route::group(['prefix' => 'role'], function () {
+
             Route::get('/', 'AdminController@indexRole')->name('admin.roles');
             Route::get('create', 'AdminController@createRole')->name('admin.role.create');
             Route::post('store', 'AdminController@storeRole')->name('admin.role.store');
@@ -57,9 +62,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
         });
     });
 
-
     /************** Route Brand Car **************/
-    Route::group(['prefix' => 'brand'], function () {
+    Route::group(['prefix' => 'brand', 'middleware' => ['role:superadministrator|dealer|administrator']], function () {
+
         Route::get('/', 'brandController@index')->name('admin.brands');
         Route::get('/create', 'brandController@create')->name('admin.brand.create');
         Route::post('/store', 'brandController@store')->name('admin.brand.store');
@@ -70,7 +75,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
     /************** End Route Brand Car **************/
 
     /************** Route Car Model **************/
-    Route::group(['prefix' => 'model'], function () {
+    Route::group(['prefix' => 'model' , 'middleware' => ['role:superadministrator|dealer|administrator']], function () {
+
         Route::get('/', 'modelController@index')->name('admin.models');
         Route::get('create', 'modelController@create')->name('admin.model.create');
         Route::post('store', 'modelController@store')->name('admin.model.store');
@@ -81,13 +87,14 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
     /************** End Route Car Model **************/
 
     /************** Route Car **************/
-    Route::group(['prefix' => 'car'], function () {
+    Route::group(['prefix' => 'car' , 'middleware' => ['role:superadministrator|dealer|administrator']], function () {
 
         Route::get('/', 'carController@index')->name('admin.cars');
         Route::get('create', 'carController@create')->name('admin.car.create');
 
         Route::get('myform', 'carController@myform');
         Route::post('myform/ajax', 'carController@myformAjax')->name('admin.car.model.ajax');
+
         Route::post('store', 'carController@store')->name('admin.car.store');
         Route::get('edit/{id}', 'carController@edit')->name('admin.car.edit');
         Route::post('update/{id}', 'carController@update')->name('admin.car.update');
@@ -102,9 +109,29 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
         Route::delete('delete/{image}', 'carController@deleteImage')->name('admin.car.dropzone.delete');
 
     });
-
     /************** End Route Car **************/
 
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::get('markRedNotify', 'NotificationController@MarkAsRead')->name('readNotify');
+        Route::get('readallnotify', 'NotificationController@markAsReadAll')->name('readAllNotify');
+        Route::get('showallnotify', 'NotificationController@notificationList')->name('notificationList');
+    });
+
+    Route::group(['prefix' => 'checkup'], function () {
+
+        Route::get('/', 'CheckupController@index')->name('admin.checkups');
+        Route::get('create/{id}', 'CheckupController@create')->name('admin.checkup.create');
+        Route::post('store/{id}', 'CheckupController@store')->name('admin.checkup.store');
+        Route::get('show/{id?}', 'CheckupController@show')->name('admin.checkup.show');
+        Route::get('edit/{id?}', 'CheckupController@edit')->name('admin.checkup.edit');
+        Route::post('update/{id}', 'CheckupController@update')->name('admin.checkup.update');
+        Route::get('delete/{id}', 'CheckupController@destroy')->name('admin.checkup.delete');
+
+        Route::get('dropzone/{id?}', 'CheckupController@showDropzone')->name('admin.checkup.dropzone');
+        Route::post('dropzone/upload/{checkup}', 'CheckupController@upload')->name('admin.checkup.dropzone.upload');
+        Route::delete('delete/{image}', 'CheckupController@deleteImage')->name('admin.checkup.dropzone.delete');
+
+    });
 
 });
 Route::group(['prefix' => 'home', 'middleware' => ['role:superadministrator|user|dealer|checkup|administrator']], function () {
@@ -112,6 +139,7 @@ Route::group(['prefix' => 'home', 'middleware' => ['role:superadministrator|user
 
 });
 
-
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/test', 'HomeController@test');
+

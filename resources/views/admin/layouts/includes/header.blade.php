@@ -1,5 +1,3 @@
-
-
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -29,65 +27,44 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
-
+        @if(auth()->user()->hasPermission('notifications'))
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
-                <span class="badge badge-danger navbar-badge">3</span>
+                <div id="notification_count">
+                <span class="badge badge-danger navbar-badge">{{auth()->user()->unreadNotifications->count()}}</span>
+                </div>
             </a>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Brad Diesel
-                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">Call me whenever you can...</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                John Pierce
-                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">I got your message bro</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <!-- Message Start -->
-                    <div class="media">
-                        <img src="dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                        <div class="media-body">
-                            <h3 class="dropdown-item-title">
-                                Nora Silvester
-                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                            </h3>
-                            <p class="text-sm">The subject goes here</p>
-                            <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                        </div>
-                    </div>
-                    <!-- Message End -->
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-            </div>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="{{route('readAllNotify')}}" class="dropdown-item dropdown-footer">Read All Messages</a>
+                   <div id="unreadNotifications">
+                    @foreach(auth()->user()->unreadNotifications as $notify)
+                        <a href="{{route('admin.car.edit', $notify->data['id'])}}" data-notif-id="{{$notify->id}}" class="dropdown-item ">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="{{asset('template/dist/img/user1-128x128.jpg')}}" alt="User Avatar"
+                                     class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        {{$notify->data['user']}}
+                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm"> {{$notify->data['title']}}{{$notify->data['user']}}  </p>
+                                    <p class="text-sm text-muted"><i
+                                            class="far fa-clock mr-1"></i> {{$notify->created_at}}</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                    @endforeach
+                   </div>
+                    <a href="{{route('notificationList')}}" class="dropdown-item dropdown-footer">See All Messages</a>
+                </div>
         </li>
-        <!-- Notifications Dropdown Menu -->
+    @endif
+
+    <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-bell"></i>
@@ -146,3 +123,16 @@
         </li>
     </ul>
 </nav>
+
+@section('script')
+
+{{--    <script>--}}
+{{--        setInterval(function () {--}}
+{{--            $('#notification_count').load(window.location.href + " #notification_count");--}}
+{{--            $('#unreadNotifications').load(window.location.href+ " #unreadNotifications");--}}
+{{--            console.log('yazan');--}}
+{{--        }, 1000);--}}
+{{--    </script>--}}
+
+
+@endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PermissionRequest;
 use App\Http\Requests\RoleRequest;
 use App\Http\Requests\UserRequest;
+use App\Models\Car;
 use App\Permission;
 use App\Role;
 use App\User;
@@ -17,12 +18,32 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:superadministrator|dealer']);
+        $this->middleware(['role:superadministrator|administrator'])->except(['index']);
     }
 
     public function index()
     {
-        return view('admin.dashboard');
+        if (auth()->user()->hasRole(['superadministrator', 'administrator'])) {
+
+            $cars = Car::orderBy('id', 'desc')->take(5)->get();
+            $notifications = auth()->user()->notifications()->orderBy('created_at', 'desc')->take(5)->get();
+
+            return view('admin.dashboard', compact('cars', 'notifications'));
+
+        } elseif (auth()->user()->hasRole('dealer')) {
+
+            $cars = Car::where('user_id', auth()->user()->id)->take(5)->get();
+
+            return view('admin.dashboard', compact('cars'));
+
+        } elseif (auth()->user()->hasRole('checkup')) {
+
+            $cars = Car::where('is_checkup', 0)->take(5)->get();
+
+            return view('admin.dashboard', compact('cars'));
+
+        }
+
     }
 
     public function indexUser()
@@ -208,7 +229,8 @@ class AdminController extends Controller
         return view('admin.manage.role.edit', compact('role', 'permissions'));
     }
 
-    public function updateRole(RoleRequest $request, $id){
+    public function updateRole(RoleRequest $request, $id)
+    {
         $role = Role::find($id);
 
         $role->update([

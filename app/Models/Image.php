@@ -15,13 +15,7 @@ class Image extends Model
 
 
    public function cars(){
-       return $this->belongsTO(Car::class);
+       return $this->belongsTo(Car::class);
    }
-
-    public function getPhotoAttribute($val)
-    {
-
-        return $val ? asset('assets/images/products/'.$val) : '';
-    }
 
 }

@@ -24,7 +24,7 @@ class CarDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'car_id'=>'required|exists:models,id',
+            'car_id'=>'required',
             'manufactured' => 'required|numeric|max:2022|min:1950',
             'seat' => 'required|numeric|max:10|min:1',
             'registration_type' => 'required|numeric',
@@ -32,7 +32,7 @@ class CarDetailsRequest extends FormRequest
             'fuel_type' => 'required|string|in:Soler,petrol',
             'transmission' => 'required|string|in:normal,automatic',
             'color' => 'required|string',
-            'current-mileage' => 'required|numeric',
+            'current_mileage' => 'required|numeric',
         ];
     }
 }

@@ -36,7 +36,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>##</th>
@@ -77,7 +77,7 @@
                         </tbody>
                     </table>
                     <div class="row justify-content-center">
-                            {{$permissions->render()}}
+                        {{$permissions->render()}}
                     </div>
                 </div>
             </div>

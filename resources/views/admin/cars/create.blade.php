@@ -38,6 +38,8 @@
                         <form action="{{route('admin.car.store')}}" method="POST">
                             @csrf
 
+                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="examplebrand">Create Car</label>
@@ -77,18 +79,19 @@
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" name="is_active"
-                                               id="exampleCheck1"
-                                               checked>
-                                        <label class="form-check-label" for="exampleCheck1">Active</label>
-                                    </div>
-                                    @error('is_active')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
 
+                                @if(auth()->user()->hasRole(['superadministrator','administrator']))
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" name="is_active"
+                                                   id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Active</label>
+                                        </div>
+                                        @error('is_active')
+                                        <span class="text-danger"> {{$message}}</span>
+                                        @enderror
+                                    </div>
+                                @endif
                             </div>
                             <!-- /.card-body -->
                             <button class="btn btn-primary">Create car</button>

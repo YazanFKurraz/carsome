@@ -15,18 +15,20 @@ class CreateCheckupsTable extends Migration
     {
         Schema::create('checkups', function (Blueprint $table) {
             $table->increments('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('car_id')->unsigned();
-            $table->boolean('external')->default(0);;
+            $table->smallInteger('external');
             $table->text('external_description')->nullable();
-            $table->boolean('wheels')->default(0);;
+            $table->smallInteger('wheels');
             $table->text('wheels_description')->nullable();
-            $table->boolean('engine')->default(0);;
+            $table->smallInteger('engine');
             $table->text('engine_description')->nullable();
-            $table->boolean('internal')->default(0);;
+            $table->smallInteger('internal');
             $table->text('internal_description')->nullable();
-            $table->boolean('is_accedent')->default(0);
+            $table->boolean('is_accident')->default(0);
 
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

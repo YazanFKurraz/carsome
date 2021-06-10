@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:delete-model')->only('destroy');
+    }
+
+
     public function index(){
 
         $models_car = Model_Car::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);;

@@ -15,21 +15,24 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned();
             $table->string('name');
-            $table->boolean('is_active');
-            $table->bigInteger('brand_id')->unsigned();;
-            $table->bigInteger('model_id')->unsigned();;
-            $table->smallInteger('manufactured');
-            $table->string('fuel_type');
-            $table->string('seat');
-            $table->string('registration_type');
-            $table->string('engine_capacity');
-            $table->string('transmission');
-            $table->string('color');
-            $table->string('current_mileage');
+            $table->boolean('is_active')->default(0);
+            $table->bigInteger('brand_id')->unsigned();
+            $table->bigInteger('model_id')->unsigned();
+            $table->smallInteger('manufactured')->nullable();
+            $table->string('fuel_type')->nullable();
+            $table->string('seat')->nullable();
+            $table->string('registration_type')->nullable();
+            $table->string('engine_capacity')->nullable();
+            $table->string('transmission')->nullable();
+            $table->string('color')->nullable();
+            $table->string('current_mileage')->nullable();
+
 
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->foreign('model_id')->references('id')->on('models')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -36,25 +36,25 @@
                     </a>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <label for="name">Name (DisPlay Name):</label>
-                            <pre>{{$permission->display_name}}</pre>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="Slug">Slug:</label>
-                            <pre>{{$permission->name}}</pre>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="description">Description:</label>
-                            <pre>{{$permission->description}}</pre>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <label for="name">Name (DisPlay Name):</label>
+                                <pre>{{$permission->display_name}}</pre>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Slug">Slug:</label>
+                                <pre>{{$permission->name}}</pre>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="description">Description:</label>
+                                <pre>{{$permission->description}}</pre>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 @endsection

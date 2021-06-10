@@ -71,8 +71,6 @@
                                             <a class="btn btn-danger btn-sm" href="{{route('admin.brand.delete', $brand->id)}}">
                                                 <i class="fa fa-trash"></i>
                                             </a>
-                                        @else
-
                                         @endif
                                     </td>
 

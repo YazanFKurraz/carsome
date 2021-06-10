@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 @yield('head')
@@ -32,6 +33,7 @@
     <link rel="stylesheet" href="{{asset('template/plugins/libraries/dropzone/dropzone.css')}}">
     <!-- dropzone libary -->
     @yield('style')
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -108,8 +110,7 @@
 <!-- dropzone libary -->
 <script src="{{asset('template/plugins/libraries/lity/lity.js')}}"></script>
 <script src="{{asset('template/plugins/libraries/dropzone/dropzone.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>
-
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 <!-- Dropzone -->
 @yield('script')
 </body>
