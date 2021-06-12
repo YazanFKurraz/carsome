@@ -9,6 +9,7 @@ use App\Models\Car;
 use App\Permission;
 use App\Role;
 use App\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -56,6 +57,11 @@ class AdminController extends Controller
     {
 
         $user = User::find($id);
+
+        if (!$user) {
+            return redirect()->route('admin.users')->with(['error' => __('Not found user')]);
+        }
+
         return view('admin.manage.user.show', compact('user'));
 
     }
@@ -68,51 +74,93 @@ class AdminController extends Controller
 
     public function storeUser(UserRequest $request)
     {
+        try {
+            if (!empty($request->password)) {
+                $password = trim($request->password);
+            } else {
+                $password = 'password';
+            }
 
-        if (!empty($request->password)) {
-            $password = trim($request->password);
-        } else {
-            $password = 'password';
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($password)
+            ]);
+
+            $user->syncRoles($request->roles);
+            return redirect()->route('admin.users')->with(['success' => __('Saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.users')->with(['error' => __('Erorr : Try again in correct ')]);
+
         }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($password)
-        ]);
-
-        $user->syncRoles($request->roles);
-        return redirect()->route('admin.users');
     }
 
     public function editUser($id)
     {
         $user = User::find($id);
         $roles = Role::all();
+
+        if (!$user) {
+            return redirect()->route('admin.users')->with(['error' => __('Not found user')]);
+        }
+
         return view('admin.manage.user.edit', compact('roles', 'user'));
     }
 
     public function updateUser(UserRequest $request, $id)
     {
 
-        $user = User::find($id);
+        try {
+            $user = User::find($id);
 
-        if ($request->donotchange == true) {
-            $password = $user->password;
-        } else {
-            $password = $request->password;
-            $user->password = Hash::make($password);
-//            User::create([
-//                'password' => Hash::make($password)]);
+            if (!$user) {
+                return redirect()->route('admin.users')->with(['error' => __('Not found user')]);
+            }
+
+            if ($request->donotchange == true) {
+                $password = $user->password;
+            } else {
+                $password = $request->password;
+                $user->password = Hash::make($password);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+
+            $user->syncRoles($request->roles);
+
+            return redirect()->route('admin.user.show', $id)->with(['success' => __('Change saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.users')->with(['error' => __('Erorr : Try again in correct')]);
+
+        }
+    }
+
+    public function destroyUser($id)
+    {
+
+        try {
+            $user = User::find($id);
+            if (!$user) {
+                return redirect()->route('admin.users')->with(['error' => __('Not found user')]);
+            }
+
+            $user->delete();
+
+            return redirect()->route('admin.users')->with(['success' => __('Delete successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.users')->with(['error' => __('Erorr : Try again in correct ')]);
+
         }
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
-
-        $user->syncRoles($request->roles);
-        return redirect()->route('admin.users');
     }
 
     public function indexPermission()
@@ -129,42 +177,58 @@ class AdminController extends Controller
 
     public function storePermission(PermissionRequest $request)
     {
-        if ($request->permission_type == 'basic') {
 
-            $premission = Permission::create([
-                'display_name' => $request->display_name,
-                'name' => $request->name,
-                'description' => $request->description
-            ]);
+        try {
+            if ($request->permission_type == 'basic') {
+
+                $premission = Permission::create([
+                    'display_name' => $request->display_name,
+                    'name' => $request->name,
+                    'description' => $request->description
+                ]);
 
 
-        } else if ($request->permission_type = 'crud') {
+            } else if ($request->permission_type = 'crud') {
 
-            $crud = explode(',', $request->crud_selected);
+                $crud = explode(',', $request->crud_selected);
 
-            if (count($crud) > 0) {
-                foreach ($crud as $x) {
-                    $display_name = ucwords($x . ' ' . $request->resource);
-                    $slug = strtolower($x) . '-' . $request->resource;
-                    $description = "Allow a user to " . strtoupper($x) . ' a ' . ucwords($request->resource);
+                if (count($crud) > 0) {
+                    foreach ($crud as $x) {
+                        $display_name = ucwords($x . ' ' . $request->resource);
+                        $slug = strtolower($x) . '-' . $request->resource;
+                        $description = "Allow a user to " . strtoupper($x) . ' a ' . ucwords($request->resource);
 
-                    $premission = Permission::create([
-                        'display_name' => $display_name,
-                        'name' => $slug,
-                        'description' => $description
-                    ]);
+                        $premission = Permission::create([
+                            'display_name' => $display_name,
+                            'name' => $slug,
+                            'description' => $description
+                        ]);
+                    }
                 }
+
+            } else {
+                return redirect()->route('admin.permission.create')->withInput();
             }
 
-        } else {
-            return redirect()->route('admin.permission.create')->withInput();
+            return redirect()->route('admin.permissions')->with(['success' => __('Saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.permissions')->with(['error' => __('Erorr : Try again in correct ')]);
+
         }
-        return redirect()->route('admin.permissions');
+
+
     }
 
     public function showPermission($id)
     {
         $permission = Permission::find($id);
+
+        if (!$permission) {
+            return redirect()->route('admin.permissions')->with(['error' => __('Not found permission')]);
+        }
+
         return view('admin.manage.permission.show', compact('permission'));
 
     }
@@ -172,19 +236,58 @@ class AdminController extends Controller
     public function editPermission($id)
     {
         $permission = Permission::find($id);
+
+        if (!$permission) {
+            return redirect()->route('admin.permissions')->with(['error' => __('Not found permission')]);
+        }
+
         return view('admin.manage.permission.edit', compact('permission'));
     }
 
     public function updatePermission(PermissionRequest $request, $id)
     {
+        try {
 
-        $permission = Permission::find($id);
-        $permission->update([
-            'display_name' => $request->display_name,
-            'description' => $request->description
-        ]);
+            $permission = Permission::find($id);
 
-        return redirect()->route('admin.permission.show', $id);
+            if (!$permission) {
+                return redirect()->route('admin.permissions')->with(['error' => __('Not found permission')]);
+            }
+
+            $permission->update([
+                'display_name' => $request->display_name,
+                'description' => $request->description
+            ]);
+
+            return redirect()->route('admin.permission.show', $id)->with(['success' => __('Change saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.permissions')->with(['error' => __('Erorr : Try again in correct ')]);
+
+        }
+
+    }
+
+    public function destroyPermission($id)
+    {
+
+        try {
+            $permission = Permission::find($id);
+            if (!$permission) {
+                return redirect()->route('admin.permissions')->with(['error' => __('Not found permission')]);
+            }
+
+            $permission->delete();
+
+            return redirect()->route('admin.permissions')->with(['success' => __('Delete successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.permissions')->with(['error' => __('Erorr : Try again in correct ')]);
+
+        }
+
     }
 
     public function indexRole()
@@ -203,21 +306,34 @@ class AdminController extends Controller
     public function storeRole(RoleRequest $request)
     {
 
-        $role = Role::create([
-            'display_name' => $request->display_name,
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        try {
 
-        $role->syncPermissions($request->permissionsSelected);
+            $role = Role::create([
+                'display_name' => $request->display_name,
+                'name' => $request->name,
+                'description' => $request->description
+            ]);
 
-        return redirect()->route('admin.roles');
+            $role->syncPermissions($request->permissionsSelected);
+
+            return redirect()->route('admin.roles')->with(['success' => __('Saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.roles')->with(['error' => __('Erorr : Try again in correct ')]);
+
+        }
 
     }
 
     public function showRole($id)
     {
         $role = Role::find($id);
+
+        if (!$role) {
+            return redirect()->route('admin.roles')->with(['error' => __('Not found role')]);
+        }
+
         return view('admin.manage.role.show', compact('role'));
 
     }
@@ -226,22 +342,63 @@ class AdminController extends Controller
     {
         $permissions = Permission::all();
         $role = Role::find($id);
+
+        if (!$role) {
+            return redirect()->route('admin.roles')->with(['error' => __('Not found role')]);
+        }
+
         return view('admin.manage.role.edit', compact('role', 'permissions'));
     }
 
     public function updateRole(RoleRequest $request, $id)
     {
-        $role = Role::find($id);
 
-        $role->update([
-            'display_name' => $request->display_name,
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
+        try {
 
-        $role->syncPermissions($request->permissionsSelected);
+            $role = Role::find($id);
 
-        return redirect()->route('admin.role.show', $id);
+            if (!$role) {
+                return redirect()->route('admin.roles')->with(['error' => __('Not found role')]);
+            }
+
+            $role->update([
+                'display_name' => $request->display_name,
+                'name' => $request->name,
+                'description' => $request->description
+            ]);
+
+            $role->syncPermissions($request->permissionsSelected);
+
+            return redirect()->route('admin.role.show', $id)->with(['success' => __('Change saved successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.roles')->with(['error' => __('Erorr : Try again in correct ')]);
+
+        }
+
     }
+
+    public function destroyRole($id)
+    {
+
+        try {
+            $role = Role::find($id);
+            if (!$role) {
+                return redirect()->route('admin.roles')->with(['error' => __('Not found role')]);
+            }
+
+            $role->delete();
+
+            return redirect()->route('admin.roles')->with(['success' => __('Delete successfully')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.roles')->with(['error' => __('Erorr : Try again in correct ')]);
+
+        }
+
+    }
+
 
 }

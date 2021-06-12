@@ -141,5 +141,4 @@ Route::group(['prefix' => 'home', 'middleware' => ['role:superadministrator|user
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test', 'HomeController@test');
 

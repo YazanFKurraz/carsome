@@ -62,4 +62,5 @@ class Car extends Model
     {
         return $query->where('is_active', 1);
     }
+
 }

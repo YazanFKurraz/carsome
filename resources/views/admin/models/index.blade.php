@@ -58,11 +58,9 @@
                                     <td>{{$model_car->brand->name}}</td>
                                     <td>
                                         @if($model_car->getActive() == 'active')
-                                            <button
-                                                class="btn btn-primary btn-sm rounded-pill">{{$model_car->getActive()}} </button>
+                                            <i class="fa fa-check-circle" style="color:green"></i>
                                         @else
-                                            <button
-                                                class="btn btn-danger btn-sm  rounded-pill">{{$model_car->getActive()}} </button>
+                                            <i class="fa fa-window-close" style="color:red"></i>
                                         @endif
                                     </td>
                                     <td>

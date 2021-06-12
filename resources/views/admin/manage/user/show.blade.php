@@ -28,6 +28,13 @@
                 <div class="col-md-3">
                     <h5>User Details</h5>
                 </div>
+                <div class="col-md-9 text-right">
+                    <a href="{{route('admin.user.edit', $user->id)}}" class="btn btn-primary"
+                       style="margin-bottom: 10px">
+                        <i class="fa fa-plus"></i>
+                        Edit user
+                    </a>
+                </div>
             </div>
             <div class="card">
                 <div class="card-body">

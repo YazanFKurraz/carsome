@@ -52,22 +52,33 @@
                 </li>
             @endif
             @if(auth()->user()->hasRole(['superadministrator','administrator', 'dealer']))
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-info"></i>
+                        <p>
+                            Brand
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('admin.brands')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Brand</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-info"></i>
                     <p>
-                        Informaion Basic
+                        Models
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{route('admin.brands')}}" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Brand</p>
-                        </a>
-                    </li>
-                </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{route('admin.models')}}" class="nav-link">
@@ -77,6 +88,7 @@
                     </li>
                 </ul>
             </li>
+
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fas fa-car"></i>

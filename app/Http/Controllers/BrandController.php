@@ -35,17 +35,25 @@ class BrandController extends Controller
             else
                 $request->request->add(['is_active' => 1]);
 
-            //save brand in DB
-            $brand = Brand::create($request->all());
+            if ($request->has('photo')) {
+                $filePath = uploadImage('brand', $request->photo);
+            }
 
-            return redirect()->route('admin.brands')->with(['success' => __('Success Save')]);
+                //save brand in DB
+                $brand = Brand::create([
+                     'name' => $request->name,
+                     'is_active' => $request->is_active,
+                     'photo' => $filePath
+                ]);
 
-        } catch (Exception $ex) {
+                return redirect()->route('admin.brands')->with(['success' => __('Success Save')]);
 
-            return redirect()->route('admin.brands')->with(['error' => __('Erorr')]);
+            }catch
+            (Exception $ex) {
 
-        }
+                return redirect()->route('admin.brands')->with(['error' => __('Erorr')]);
 
+            }
     }
 
     public function edit($id)

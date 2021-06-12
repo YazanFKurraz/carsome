@@ -42,7 +42,7 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="examplebrand">Create Car</label>
+                                    <label for="examplebrand">Name car</label>
                                     <input type="text" class="form-control" name="name" id="examplebrand"
                                            placeholder="Enter name car">
                                     @error('name')
@@ -67,8 +67,6 @@
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
-
-
                                 <div class="form-group">
                                     <label>Select Model</label>
 

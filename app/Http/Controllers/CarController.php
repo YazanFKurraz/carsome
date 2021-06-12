@@ -93,27 +93,27 @@ class CarController extends Controller
     public function store(CarRequest $request)
     {
         try {
-        //check active
-        if (!$request->has('is_active'))
-            $request->request->add(['is_active' => 0]);
-        else
-            $request->request->add(['is_active' => 1]);
+            //check active
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
 
-        //save brand in DB
-        $car = Car::create($request->all());
+            //save brand in DB
+            $car = Car::create($request->all());
 
-        // condition just user has role dealer and user
-        if (auth()->user()->hasRole(['dealer', 'user'])) {
-            $user = User::get();
-            // get at last create car
-            $car = Car::latest()->first();
-            //send notifiction and save to details in method to database in class AddCarByUser
-            // constractor id car $car
-            Notification::send($user, new AddCarByUser($car));
-        }
+            // condition just user has role dealer and user
+            if (auth()->user()->hasRole(['dealer', 'user'])) {
+                $user = User::get();
+                // get at last create car
+                $car = Car::latest()->first();
+                //send notifiction and save to details in method to database in class AddCarByUser
+                // constractor id car $car
+                Notification::send($user, new AddCarByUser($car));
+            }
 
 
-        return redirect()->route('admin.cars')->with(['success' => __('Success Save')]);
+            return redirect()->route('admin.cars')->with(['success' => __('Success Save')]);
 
         } catch (Exception $ex) {
 
@@ -209,7 +209,9 @@ class CarController extends Controller
     {
 
         $car = Car::find($id);
-//        return $car;
+        if (!$car) {
+            return redirect()->route('admin.cars')->with(['error' => __('Not found')]);
+        }
         return view('admin.cars.dropzone', compact('car'));
     }
 
@@ -251,7 +253,6 @@ class CarController extends Controller
 
         }
     }
-
 
 
 }

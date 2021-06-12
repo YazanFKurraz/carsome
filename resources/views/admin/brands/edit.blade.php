@@ -43,7 +43,6 @@
                                     <label class="form-check-label" for="exampleCheck1">Active</label>
                                 </div>
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
                                 <button class="btn btn-primary">Save change</button>

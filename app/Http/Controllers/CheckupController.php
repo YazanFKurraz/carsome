@@ -6,8 +6,11 @@ use App\Http\Requests\CheckupRequest;
 use App\Models\Car;
 use App\Models\Checkup;
 use App\Models\Images_checkups;
+use App\Notifications\AddCheckup;
+use App\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +26,7 @@ class CheckupController extends Controller
     public function index()
     {
 
-        $cars = Car::with('checkup')->orderby('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $cars = Car::with('checkup')->orderby('is_checkup','ASC')->paginate(PAGINATION_COUNT);
 
         return view('admin.checkups.index', compact('cars'));
 
@@ -70,6 +73,15 @@ class CheckupController extends Controller
                 'is_checkup' => $request->is_checkup
             ]);
 
+            // condition just user has role dealer and user
+            if (auth()->user()->hasRole(['checkup'])) {
+                $user = User::get();
+                // get at last create car
+                $car = Car::where('id', $id)->first();
+                //send notifiction and save to details in method to database in class AddCarByUser
+                // constractor id car $car
+                Notification::send($user, new AddCheckup($car));
+            }
             DB::commit();
 
             return redirect()->route('admin.checkups')->with(['success' => __('Success Save')]);

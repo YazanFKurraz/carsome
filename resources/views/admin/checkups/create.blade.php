@@ -37,17 +37,22 @@
                         <input type="hidden" name="car_id" value="{{$car->id}}">
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="examplebrand">External</label>
-                                    <input type="text" class="form-control" name="external" id="examplebrand"
-                                           placeholder="Enter number rating external">
-                                    @error('external')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
+                            <div class="form-group col-5">
+                                <label for="exampleSelectBorderWidth2">External</label>
+                                <select class="custom-select form-control-border border-width-2"
+                                        id="exampleSelectBorderWidth2"
+                                        name="external">
+                                    <option value=" " selected>select rating : 1 _ 5 </option>
+                                    <option value="1">1 lowest rating </option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 highest rating </option>
+                                </select>
+                                @error('external')
+                                <span class="text-danger"> {{$message}}</span>
+                                @enderror
                             </div>
-
                             <div class="col-sm-6">
                                 <!-- textarea -->
                                 <div class="form-group">
@@ -55,16 +60,21 @@
                                     <textarea class="form-control" rows="1" name="external_description" placeholder="Enter ..."></textarea>
                                 </div>
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="examplebrand">Wheels</label>
-                                    <input type="text" class="form-control" name="wheels" id="examplebrand"
-                                           placeholder="Enter number rating wheels">
+                                <div class="form-group col-5">
+                                    <label for="exampleSelectBorderWidth2">Wheels</label>
+                                    <select class="custom-select form-control-border border-width-2"
+                                            id="exampleSelectBorderWidth2"
+                                            name="wheels">
+                                        <option value=" " selected>select rating : 1 _ 5 </option>
+                                        <option value="1">1 lowest rating </option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5 highest rating </option>
+                                    </select>
                                     @error('wheels')
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
-                                </div>
                             </div>
 
                             <div class="col-sm-6">
@@ -75,17 +85,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="examplebrand">Engine</label>
-                                    <input type="text" class="form-control" name="engine" id="examplebrand"
-                                           placeholder="Enter number rating engine">
-                                    @error('engine')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                            <div class="form-group col-5">
+                                <label for="exampleSelectBorderWidth2">Engine</label>
+                                <select class="custom-select form-control-border border-width-2"
+                                        id="exampleSelectBorderWidth2"
+                                        name="engine">
+                                    <option value=" " selected>select rating : 1 _ 5 </option>
+                                    <option value="1">1 lowest rating </option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 highest rating </option>
 
+                                </select>
+                                @error('engine')
+                                <span class="text-danger"> {{$message}}</span>
+                                @enderror
+                            </div>
                             <div class="col-sm-6">
                                 <!-- textarea -->
                                 <div class="form-group">
@@ -93,16 +109,22 @@
                                     <textarea class="form-control" rows="1" name="engine_description" placeholder="Enter ..."></textarea>
                                 </div>
                             </div>
+                            <div class="form-group col-5">
+                                <label for="exampleSelectBorderWidth2">Internal</label>
+                                <select class="custom-select form-control-border border-width-2"
+                                        id="exampleSelectBorderWidth2"
+                                        name="internal">
+                                    <option value=" " selected>select rating : 1 _ 5 </option>
+                                    <option value="1">1 lowest rating </option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 highest rating </option>
 
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="examplebrand">Internal</label>
-                                    <input type="text" class="form-control" name="internal" id="examplebrand"
-                                           placeholder="Enter number rating internal">
-                                    @error('internal')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
+                                </select>
+                                @error('internal')
+                                <span class="text-danger"> {{$message}}</span>
+                                @enderror
                             </div>
 
                             <div class="col-sm-6">

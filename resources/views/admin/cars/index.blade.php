@@ -42,9 +42,9 @@
                             <th>##</th>
                             <th>Name</th>
                             <th>Brand</th>
-                            <th>Model</th>
                             <th>Create_by</th>
                             <th>Status</th>
+                            <th>Checkup</th>
                             <th>Details</th>
                             <th>Transation</th>
                         </tr>
@@ -54,17 +54,27 @@
                             @foreach($cars as $car)
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
-                                    <td>{{$car->name}}</td>
+                                    <td>
+                                        @if(strlen($car->name) > 20)
+                                            {{substr("$car->name",'0','20') .'....' }}
+                                        @else
+                                            {{$car->name}}
+                                        @endif
+                                    </td>
                                     <td>{{$car->brand->name}}</td>
-                                    <td>{{$car->model->name}}</td>
                                     <td>{{$car->user->name}}</td>
                                     <td>
                                         @if($car->getActive() == 'active')
-                                            <button
-                                                class="btn btn-flat btn-primary btn-sm rounded-pill">{{$car->getActive()}} </button>
+                                            <i class="fa fa-check-circle" style="color:blue"></i>
                                         @else
-                                            <button
-                                                class="btn btn-flat bg-danger btn-xs rounded-pill">{{$car->getActive()}} </button>
+                                            <i class="fa fa-window-close" style="color:brown"></i>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($car->getIsCheckup() == 'checkup')
+                                            <i class="fa fa-check-circle" style="color:green"></i>
+                                        @else
+                                            <i class="fa fa-window-close" style="color:red"></i>
                                         @endif
                                     </td>
                                     <td>

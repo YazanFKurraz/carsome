@@ -78,12 +78,13 @@ class LaratrustSeeder extends Seeder
                 foreach ($modules as $module => $value) {
 
                     // Create default user for each permission set
-                    $user = User::create([
-                        'name' => ucwords(str_replace('_', ' ', $key)),
-                        'email' => $key.'@app.com',
-                        'password' => bcrypt('password'),
-                        'remember_token' => Str::random(10),
-                    ]);
+//                    $user = User::create([
+//                        'name' => ucwords(str_replace('_', ' ', $key)),
+//                        'email' => $key.'@app.com',
+//                        'password' => bcrypt('password'),
+//                        'remember_token' => Str::random(10),
+//                    ]);
+
                     $permissions = [];
 
                     foreach (explode(',', $value) as $p => $perm) {

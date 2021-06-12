@@ -30,10 +30,4 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function test(){
-
-       return  $checkup = Checkup::with('car', 'images_checkup')->where('id', 12)->first();
-
-    }
-
 }

@@ -58,14 +58,9 @@
 
                                     <td>
                                         @if($car->getIsCheckup() == 'checkup')
-                                            <button
-                                                class="btn btn-primary rounded-pill">{{$car->getIsCheckup()}} </button>
+                                            <i class="fa fa-check-circle" style="color:green"></i>
                                         @else
-                                            <a href="{{route('admin.checkup.create', $car->id)}}">
-                                                <button
-                                                    class="btn btn-danger rounded-pill">{{$car->getIsCheckup()}} </button>
-                                            </a>
-
+                                            <i class="fa fa-window-close" style="color:red"></i>
                                         @endif
                                     </td>
                                     <td>
@@ -79,12 +74,14 @@
                                         </a>
                                     </td>
                                     <td>
+                                        <a class="btn bg-primary btn-sm" href="{{route('admin.checkup.create', $car->id)}}">
+                                            Add Checkup
+                                        </a>
                                         @if(@$car->checkup)
-                                            <a class="btn bg-info btn-sm"
-                                                   href="{{route('admin.checkup.dropzone', @$car->checkup->id)}}">
-                                            Add Images </a>
+                                            <a class="btn btn-outline-info btn-sm"
+                                               href="{{route('admin.checkup.dropzone', @$car->checkup->id)}}">
+                                                Add Images </a>
                                         @endif
-
                                     </td>
                                 </tr>
                             @endforeach

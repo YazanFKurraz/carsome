@@ -42,6 +42,7 @@
                         <thead>
                         <tr>
                             <th>##</th>
+                            <th>Photo</th>
                             <th>Name</th>
                             <th>Status</th>
                             <th>Transation</th>
@@ -53,12 +54,15 @@
                             @foreach($brands as $brand)
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
+                                    <td>
+                                        <img style="width:100px; high:100px;" class="rounded-circle" src="{{asset($brand->photo)}}">
+                                    </td>
                                     <td>{{$brand->name}}</td>
                                     <td>
                                         @if($brand->getActive() == 'active')
-                                            <button class="btn btn-primary btn-sm rounded-pill" >{{$brand->getActive()}} </button>
+                                            <i class="fa fa-check-circle" style="color:green"></i>
                                         @else
-                                            <button class="btn btn-danger btn-sm rounded-pill" >{{$brand->getActive()}} </button>
+                                            <i class="fa fa-window-close" style="color:red"></i>
                                         @endif
                                     </td>
 

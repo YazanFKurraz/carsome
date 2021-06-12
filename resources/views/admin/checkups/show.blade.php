@@ -80,6 +80,19 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script src="{{asset('js/app.js')}}"></script>
+    <script>
 
+        var app = new Vue({
+            el: '#app',
+            data: {
+                permission_type: 'basic',
+                crudSelected: ['create', 'read', 'update', 'delete'],
+                resource: ''
+            },
+        });
 
+    </script>
 @endsection

@@ -49,11 +49,11 @@
                                 <div class="form-group">
                                     <lable for="password">Password</lable>
                                     <input type="password" name="password" class="form-control"
-                                           placeholder="Manually type password" id="password" v-if="!auto_generate">
+                                           placeholder="Manually type password" id="password" style="display:none">
                                 </div>
                                 <div class="form-check">
                                     <input type="checkbox" name="auto_generate" id="auto_generate"
-                                           class="form-check-input" v-model="auto_generate">
+                                           class="form-check-input" checked onclick="myFunction()">
                                     <lable for="auto_generate" class="form-check-label"> Auto Generate Password</lable>
                                 </div>
                             </div>
@@ -82,27 +82,20 @@
                 </div>
             </div>
         </div>
-{{--        <example-component></example-component>--}}
 
     </div>
 @endsection
 
 @section('script')
     <script>
-        // function myFunction() {
-        //     var checkBox = document.getElementById("auto_generate");
-        //     var text = document.getElementById("password");
-        //         if (checkBox.checked == true) {
-        //             text.style.display = "none";
-        //         } else {
-        //             text.style.display = "block";
-        //         }
-        // }
-        const app = new Vue({
-           el: '#app',
-            data : {
-                auto_generate : true
+        function myFunction() {
+            var checkBox = document.getElementById("auto_generate");
+            var text = document.getElementById("password");
+            if (checkBox.checked == true) {
+                text.style.display = "none";
+            } else {
+                text.style.display = "block";
             }
-        });
+        }
     </script>
 @endsection

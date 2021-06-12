@@ -63,8 +63,10 @@
                         <div class="col-md-4">
                            <pre> <label for="description">Registration Ttype:</label> {{$car->registration_type}}</pre>
                         </div>
-                        <div class="col-md-4">
-                            <pre> <label for="description">Description:</label> {!! $car->description !!}</pre>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                                <pre> <label for="description">Description:</label> {!! $car->description !!}</pre>
                         </div>
                     </div>
                 </div>

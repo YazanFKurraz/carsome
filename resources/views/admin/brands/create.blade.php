@@ -31,9 +31,21 @@
                 <div class="card-body">
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{route('admin.brand.store')}}" method="POST">
+                        <form action="{{route('admin.brand.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
+
+                                <div class="form-group">
+                                    <label> Add image brand </label>
+                                    <label id="projectinput7" class="file center-block">
+                                        <input type="file" id="file" name="photo">
+                                        <span class="file-custom"></span>
+                                    </label>
+                                    @error('photo')
+                                    <span class="text-danger">{{$message}} </span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="examplebrand">Create Brand</label>
                                     <input type="text" class="form-control" name="name" id="examplebrand"

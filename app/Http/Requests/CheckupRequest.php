@@ -25,10 +25,10 @@ class CheckupRequest extends FormRequest
     public function rules()
     {
         return [
-            'external' => 'required|numeric|max:5|min:1',
-            'wheels' => 'required|numeric|max:5|min:1',
-            'engine' => 'required|numeric|max:5|min:1',
-            'internal' => 'required|numeric|max:5|min:1'
+            'external' => 'required|numeric|in:1,2,3,4,5',
+            'wheels' => 'required|numeric|in:1,2,3,4,5',
+            'engine' => 'required|numeric|in:1,2,3,4,5',
+            'internal' => 'required|numeric|in:1,2,3,4,5'
         ];
     }
 }
