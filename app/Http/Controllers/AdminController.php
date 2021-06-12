@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\ContactUs;
 use App\Http\Requests\PermissionRequest;
 use App\Http\Requests\RoleRequest;
+use App\Http\Requests\UserOrderRequest;
 use App\Http\Requests\UserRequest;
 use App\Permission;
 use App\Role;
 use App\User;
+use App\UserOrder;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -17,7 +20,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['role:superadministrator|dealer']);
+        $this->middleware(['role:superadministrator|dealer|administrator']);
     }
 
     public function index()
@@ -220,6 +223,17 @@ class AdminController extends Controller
         $role->syncPermissions($request->permissionsSelected);
 
         return redirect()->route('admin.role.show', $id);
+    }
+
+    public function showOrderUser()
+    {
+       $userOrders= UserOrder::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+       return view('admin.userOrder.index',compact('userOrders'));
+    }
+    public function contactUs()
+    {
+        $users = ContactUs::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+        return view('admin.contact.index',compact('users'));
     }
 
 }

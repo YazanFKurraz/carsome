@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
 
             if (Auth::guard($guard)->hasRole('user')) {
                 return redirect()->route(RouteServiceProvider::HOME);
-            } elseif (Auth::guard($guard)->hasRole(['superadministrator', 'dealer'])) {
+            } elseif (Auth::guard($guard)->hasRole(['superadministrator', 'dealer', 'administrator'])) {
                 return redirect()->route(RouteServiceProvider::DashBoard);
             }
         }

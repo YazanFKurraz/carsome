@@ -18,7 +18,7 @@
                     </div>
                     <div class="my-3">
                         <label for="email" class="d-block py-2 ">Password</label>
-                        <input type="email" name="password" class="form-control col-md-8 m-auto">
+                        <input type="password" name="password" class="form-control col-md-8 m-auto">
                     </div>
                     <div class="my-3">
                         <input type="checkbox" class="  m-auto"> Remember me

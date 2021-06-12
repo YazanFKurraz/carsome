@@ -1,15 +1,19 @@
 @extends('front.layouts.app')
 @section('content')
 
-
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 <div class="banner header-text">
     <div class="owl-banner owl-carousel">
-        <div class="banner-item-01">
-            <div class="text-content">
-                <h4>Find your car today!</h4>
-                <h2>Lorem ipsum dolor sit amet</h2>
+        <div class="banner-item-03">
+            <div class="text-content ">
+                <h2 >Buy Your <span class="text-danger">Car</span> Online</h2>
+                <div class=" d-block mt-3">
+                    <a  href="{{route('cars.index')}}" class="btn-lg btn-danger">Buy</a>
+                    <span class="mx-3 text-white  font-weight-bold">OR</span>
+                    <a href="{{route('sell.create')}} " class="btn-lg btn-dark ">Sell</a>
+                </div>
+
             </div>
         </div>
         <div class="banner-item-02">
@@ -21,138 +25,138 @@
         <div class="banner-item-03">
             <div class="text-content">
                 <h4>Saepe Omnis</h4>
-                <h2>Quaerat suscipit unde minus dicta</h2>
+                <h2>Buy Your Car Online</h2>
             </div>
         </div>
     </div>
 </div>
 <!-- Banner Ends Here -->
 
-<div class="latest-products">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-heading">
-                    <h2>Featured Cars</h2>
-                    <a href="cars.html">view more <i class="fa fa-angle-right"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="front/{{asset('/front/assets/images/product-1-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--<div class="latest-products">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="section-heading">--}}
+{{--                    <h2>Featured Cars</h2>--}}
+{{--                    <a href="cars.html">view more <i class="fa fa-angle-right"></i></a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="front/{{asset('/front/assets/images/product-1-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-2-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-2-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-3-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-3-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-4-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-4-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-5-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-5-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <div class="col-lg-4 col-md-6">
-                <div class="product-item">
-                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-6-370x270.jpg')}}" alt=""></a>
-                    <div class="down-content">
-                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>
+{{--            <div class="col-lg-4 col-md-6">--}}
+{{--                <div class="product-item">--}}
+{{--                    <a href="car-details.html"><img src="{{asset('/front/assets/images/product-6-370x270.jpg')}}" alt=""></a>--}}
+{{--                    <div class="down-content">--}}
+{{--                        <a href="car-details.html"><h4>Lorem ipsum dolor sit amet, consectetur</h4></a>--}}
 
-                        <h6><small><del> $11199.00</del></small> $11179.00</h6>
+{{--                        <h6><small><del> $11199.00</del></small> $11179.00</h6>--}}
 
-                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>
+{{--                        <p>190 hp &nbsp;/&nbsp; Petrol &nbsp;/&nbsp; 2008 &nbsp;/&nbsp; Used vehicle</p>--}}
 
-                        <small>
-                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--                        <small>--}}
+{{--                            <strong title="Author"><i class="fa fa-dashboard"></i> 130 000km</strong> &nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Author"><i class="fa fa-cube"></i> 1800cc</strong>&nbsp;&nbsp;&nbsp;&nbsp;--}}
+{{--                            <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>--}}
+{{--                        </small>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 <div class="best-features">
     <div class="container">
@@ -194,39 +198,21 @@
                 </div>
             </div>
 
+            @forelse(\App\Models\Car::orderBy('id','desc')->take(3)->get() as $car)
             <div class="col-lg-4 col-md-6">
                 <div class="service-item">
-                    <a href="#" class="services-item-image"><img src="{{asset('/front/assets/images/blog-1-370x270.jpg')}}" class="img-fluid" alt=""></a>
+                    <a href="#" class="services-item-image"><img src="{{asset($car->images->first()->path)}}" class="img-fluid" alt=""></a>
 
                     <div class="down-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>
+                        <h4><a href="#">{{$car->name}}</a></h4>
 
                         <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item">
-                    <a href="#" class="services-item-image"><img src="{{asset('/front/assets/images/blog-2-370x270.jpg')}}" class="img-fluid" alt=""></a>
+                @empty
 
-                    <div class="down-content">
-                        <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>
-
-                        <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="service-item">
-                    <a href="#" class="services-item-image"><img src="{{asset('/front/assets/images/blog-3-370x270.jpg')}}" class="img-fluid" alt=""></a>
-
-                    <div class="down-content">
-                        <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>
-
-                        <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>
-                    </div>
-                </div>
-            </div>
+                @endforelse
         </div>
     </div>
 </div>

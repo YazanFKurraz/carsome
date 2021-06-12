@@ -94,7 +94,42 @@
                     </li>
                 </ul>
             </li>
+            @if(auth()->user()->hasRole(['superadministrator','administrator']))
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Use Order
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.users.order')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View Order</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fa fa-envelope"></i>
 
+                    <p>
+                        Contact User
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.users.contact')}}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>View message</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @endif
 
         </ul>
     </nav>

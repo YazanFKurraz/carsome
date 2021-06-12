@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    @yield('head')
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,7 +40,7 @@
 <header class="fixed-top">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="index.html"><h2>Car Dealer <em>Website</em></h2></a>
+            <a class="navbar-brand" href="{{route('home')}}"><h2>Car Dealer <em>Website</em></h2></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -47,17 +48,17 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home
+                        <a class="nav-link" href="{{route('home')}}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
 
-                    <li class="nav-item"><a class="nav-link" href="cars.html">Cars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('cars.index')}}">Cars</a></li>
 
 
-                    <li class="nav-item"><a class="nav-link" href="about-us.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('about_us')}}">About Us</a></li>
 
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('contact_us')}}">Contact Us</a></li>
                     @guest
                         <li class="nav-item"><a class="nav-link" href="{{route('register')}}">Register</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('login')}}">Login</a></li>
@@ -68,7 +69,7 @@
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                aria-haspopup="true" aria-expanded="false">{{auth()->user()->name}}</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="">settings</a>
+                                <a class="dropdown-item" href="{{route('profile.show')}}">Profile</a>
                                 <a class="dropdown-item text-danger" href="{{route('log-out')}}">logout</a>
                             </div>
                         </li>
@@ -103,5 +104,6 @@
 <!-- Additional Scripts -->
 <script src="{{asset('/front/assets/js/custom.js')}}"></script>
 <script src="{{asset('/front/assets/js/owl.js')}}"></script>
+@yield('script')
 </body>
 </html>

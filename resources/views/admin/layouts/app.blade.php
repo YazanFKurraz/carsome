@@ -108,7 +108,7 @@
 <!-- dropzone libary -->
 <script src="{{asset('template/plugins/libraries/lity/lity.js')}}"></script>
 <script src="{{asset('template/plugins/libraries/dropzone/dropzone.js')}}"></script>
-<script src="{{asset('js/app.js')}}"></script>
+
 
 <!-- Dropzone -->
 @yield('script')

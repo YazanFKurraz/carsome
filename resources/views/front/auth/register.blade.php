@@ -54,16 +54,16 @@
                                 <input type="phone" name="phone" class="form-control col-md-8 m-auto">
                             </div>
 
-                            <div class="my-3">
-                                <label for="role" class="d-block py-2">Role</label>
+{{--                            <div class="my-3">--}}
+{{--                                <label for="role" class="d-block py-2">Role</label>--}}
 
-                                <select name="role" class="form-control col-md-8 m-auto">
-                                    <option value="" selected disabled> choose your role</option>
-                                    <option value="user">user</option>
-                                    <option value="dealer">dealer</option>
-                                    <option name="checkup">checkup</option>
-                                </select>
-                            </div>
+{{--                                <select name="role" class="form-control col-md-8 m-auto">--}}
+{{--                                    <option value="" selected disabled> choose your role</option>--}}
+{{--                                    <option value="user">user</option>--}}
+{{--                                    <option value="dealer">dealer</option>--}}
+{{--                                    <option name="checkup">checkup</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                             <div class="mt-5">
                                 <button class="btn btn-danger col-4">
                                     Register

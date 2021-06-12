@@ -32,7 +32,7 @@ class CarDetailsRequest extends FormRequest
             'fuel_type' => 'required|string|in:Soler,petrol',
             'transmission' => 'required|string|in:normal,automatic',
             'color' => 'required|string',
-            'current-mileage' => 'required|numeric',
+            'current_mileage' => 'required|numeric',
         ];
     }
 }

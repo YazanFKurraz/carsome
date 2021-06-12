@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator|dealer']], function () {
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator|dealer|administrator'] ,'verified'], function () {
 
     Route::get('/', 'AdminController@index')->name('dashboard');
     Route::group(['prefix' => 'mange'], function () {
@@ -92,6 +93,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:superadministrator
         Route::delete('delete/{image}', 'carController@deleteImage')->name('admin.car.dropzone.delete');
 
     });
+    Route::group(['prefix' => 'users'],function(){
+        Route::get('order', 'AdminController@showOrderUser')->name('admin.users.order');
+        Route::get('/contact-user', 'AdminController@contactUs')->name('admin.users.contact');
+
+    });
+
 
     /************** End Route Car **************/
 
@@ -102,11 +109,4 @@ Route::group(['prefix' => 'home', 'middleware' => ['role:superadministrator|user
 
 });
 
-
-//logout
-Route::get('/logout','Auth\LoginController@logout')->name('log-out');
-// front view
-
-Route::get('/','HomeController@index')->name('home');
-Route::get('/home','HomeController@index')->name('home');
 

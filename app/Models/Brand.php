@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\UserOrder;
 use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
@@ -24,6 +25,11 @@ class Brand extends Model
     public function cars(){
         return $this->hasMany(Car::class);
     }
+
+    public function user_orders(){
+        return $this->hasMany(UserOrder::class);
+    }
+
 
     public function getActive()
     {
