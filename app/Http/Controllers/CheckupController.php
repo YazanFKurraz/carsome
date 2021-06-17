@@ -67,10 +67,11 @@ class CheckupController extends Controller
             else
                 $request->request->add(['is_accident' => 1]);
 
-            $checkup = Checkup::create($request->except(['is_checkup', '_token']));
+            $checkup = Checkup::create($request->except(['is_checkup','price', '_token']));
 
             $car->update([
-                'is_checkup' => $request->is_checkup
+                'is_checkup' => $request->is_checkup,
+                'price' => $request->price,
             ]);
 
             // condition just user has role dealer and user
@@ -86,7 +87,7 @@ class CheckupController extends Controller
 
             return redirect()->route('admin.checkups')->with(['success' => __('Success Save')]);
 
-        } catch (Exception $ex) {
+        } catch (Excdeption $ex) {
             DB::rollBack();
 
             return redirect()->route('admin.checkups')->with(['error' => __('Erorr')]);

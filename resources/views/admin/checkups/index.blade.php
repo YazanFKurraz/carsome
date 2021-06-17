@@ -36,6 +36,7 @@
                         <tr>
                             <th>##</th>
                             <th>Name</th>
+                            <th>price</th>
                             <th>Create checkup</th>
                             <th>checkup</th>
                             <th>Transation</th>
@@ -48,7 +49,14 @@
                             @foreach($cars as $car)
                                 <tr>
                                     <td>{{$loop->index +1}}</td>
-                                    <td>{{$car->name}}</td>
+                                    <td>
+                                        @if(strlen($car->name) > 20)
+                                            {{substr("$car->name",'0','20') .'....' }}
+                                        @else
+                                            {{$car->name}}
+                                        @endif
+                                    </td>
+                                    <td>{{$car->price}}</td>
                                     <td>
                                         @if(@$car->checkup->created_at)
                                             <b>{{$car->checkup->created_at}}</b>
@@ -74,7 +82,8 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="btn bg-primary btn-sm" href="{{route('admin.checkup.create', $car->id)}}">
+                                        <a class="btn bg-primary btn-sm"
+                                           href="{{route('admin.checkup.create', $car->id)}}">
                                             Add Checkup
                                         </a>
                                         @if(@$car->checkup)

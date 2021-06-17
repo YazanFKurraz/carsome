@@ -108,12 +108,17 @@
                         @endisset
                         </tbody>
                     </table>
-                    <div class="row justify-content-center">
-                        {{$cars->render()}}
+                    <br>
+                    <div class="row">
+                        <div class="col-md-3">
+                            Showing {{$cars->count() }} to {{($cars->currentPage() -1 ) * $cars->perPage() + count($cars)}}  of  {{$cars->total()}}  entries
+                        </div>
+                        <div class="row col-md-9 d-flex justify-content-end">
+                            {{$cars->render()}}
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- /.card-body -->

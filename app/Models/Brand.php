@@ -15,7 +15,7 @@ class Brand extends Model
         'is_active' => 'boolean',
     ];
 
-    public function models()
+    public function model_car()
     {
 
         return $this->hasMany(Model_Car::class);

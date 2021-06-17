@@ -25,7 +25,7 @@ return [
         ],
         'dealer' => [
             'brand' => 'c,r,u',
-            'mdoel' => 'c,r,u',
+            'model' => 'c,r,u',
             'car' => 'c,r,u',
             'profile' => 'r,u'
         ],

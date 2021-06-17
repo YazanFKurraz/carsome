@@ -30,9 +30,13 @@ class CarDetailsRequest extends FormRequest
             'registration_type' => 'required|numeric',
             'engine_capacity' => 'required|numeric',
             'fuel_type' => 'required|string|in:Soler,petrol',
-            'transmission' => 'required|string|in:normal,automatic',
+            'transmission' => 'required|string|in:manual,automatic',
             'color' => 'required|string',
             'current_mileage' => 'required|numeric',
+            'price' => 'required|numeric',
+            'power_horse' => 'required|numeric',
+            'is_status' => 'required',
+            'doors' => 'required|numeric|max:15|min:2',
         ];
     }
 }

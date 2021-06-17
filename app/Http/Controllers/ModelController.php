@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\ModelRequest;
 use App\Models\Brand;
 use App\Models\Model_Car;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Exception;
+
 
 class ModelController extends Controller
 {
@@ -16,63 +17,99 @@ class ModelController extends Controller
     }
 
 
-    public function index(){
+    public function index()
+    {
 
-        $models_car = Model_Car::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);;
+        $models_car = Model_Car::orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
 
         return view('admin.models.index', compact('models_car'));
 
     }
 
-    public function create(){
+    public function create()
+    {
 
         $brands = Brand::active()->get();
         return view('admin.models.create', compact('brands'));
     }
 
-    public function store(ModelRequest $request){
+    public function store(ModelRequest $request)
+    {
+        try {
 
-        //check active
-        if (!$request->has('is_active'))
-            $request->request->add(['is_active' => 0]);
-        else
-            $request->request->add(['is_active' => 1]);
+            //check active
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
 
-          Model_Car::create($request->all());
+            Model_Car::create($request->all());
 
-        return redirect()->route('admin.models');
+            return redirect()->route('admin.models');
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.models')->with(['error' => __('Error')]);
+
+        }
 
     }
 
-
-    public function edit($id){
+    public function edit($id)
+    {
         $model_car = Model_Car::find($id);
         $brands = Brand::active()->get();
 
-        return view('admin.models.edit',compact('model_car', 'brands'));
+        return view('admin.models.edit', compact('model_car', 'brands'));
     }
 
-    public function update(ModelRequest $request, $id){
-        //check active
-        $model_car = Model_Car::find($id);
+    public function update(ModelRequest $request, $id)
+    {
+        try {
 
-        if (!$request->has('is_active'))
-            $request->request->add(['is_active' => 0]);
-        else
-            $request->request->add(['is_active' => 1]);
+            //check active
+            $model_car = Model_Car::find($id);
 
-        $model_car->update($request->all());
+            if (!$request->has('is_active'))
+                $request->request->add(['is_active' => 0]);
+            else
+                $request->request->add(['is_active' => 1]);
 
-        return redirect()->route('admin.models');
+            $model_car->update($request->all());
+
+            return redirect()->route('admin.models');
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.models')->with(['error' => __('Error')]);
+
+        }
     }
 
-    public function destroy($id){
 
-        $model_brand = Model_Car::find($id);
+    public function destroy($id)
+    {
 
-        $model_brand->delete();
+        try {
+            $model = Model_Car::find($id);
+            if (!$model) {
+                return redirect()->route('admin.models')->with(['error' => __('Not found')]);
+            }
 
-        return redirect()->route('admin.models');
+            $model = Model_Car::with('cars')->where('id', $id)->first();
+
+            if ($model->cars->count() == 0) {
+                $model->delete();
+            } else {
+                return redirect()->route('admin.models')->with(['error' => __('Error: cannot delete brand because model existence ')]);
+            }
+
+            return redirect()->route('admin.models')->with(['success' => __('Success delete')]);
+
+        } catch (Exception $ex) {
+
+            return redirect()->route('admin.models')->with(['error' => __('Error')]);
+
+        }
 
     }
 }

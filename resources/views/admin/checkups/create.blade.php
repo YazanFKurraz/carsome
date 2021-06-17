@@ -153,6 +153,16 @@
                                 <span class="text-danger"> {{$message}}</span>
                                 @enderror
                             </div>
+
+
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="examplebrand">Price</label>
+                            <input type="text" class="form-control" name="price" id="examplebrand"
+                                   placeholder="Enter price">
+                            @error('price')
+                            <span class="text-danger"> {{$message}}</span>
+                            @enderror
                         </div>
                         <!-- /.card-body -->
                         <br>

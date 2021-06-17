@@ -59,14 +59,11 @@
                                                                         Delete
                                                                     </button>
                                                                 </form>
-
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 @endforeach
                                             </div>
-
                                         @else
                                             <p>No images for this car</p>
                                         @endif
@@ -74,11 +71,12 @@
 
                                         <div class="row justify-content-center">
                                             <div class="col-md-10">
-                                                <form action="{{route('admin.checkup.dropzone.upload', ['checkup' => $checkup])}}"
-                                                      method="POST"
-                                                      class="dropzone"
-                                                      id="myDrpozone"
-                                                      enctype="multipart/form-data">
+                                                <form
+                                                    action="{{route('admin.checkup.dropzone.upload', ['checkup' => $checkup])}}"
+                                                    method="POST"
+                                                    class="dropzone"
+                                                    id="myDrpozone"
+                                                    enctype="multipart/form-data">
                                                     @csrf
                                                 </form>
                                             </div>

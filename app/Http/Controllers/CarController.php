@@ -27,12 +27,15 @@ class CarController extends Controller
 
     public function index()
     {
+
         if (auth()->user()->hasRole(['superadministrator', 'administrator'])) {
 
             $cars = Car::with('model', 'brand')
                 ->orderBy('id', 'DESC')
                 ->paginate(PAGINATION_COUNT);
+//             dd($brands->toArray());
             return view('admin.cars.index', compact('cars'));
+
 
         } elseif (auth()->user()->hasRole('dealer')) {
 
@@ -128,12 +131,11 @@ class CarController extends Controller
 
         try {
             Car::whereId($request->car_id)->update(
-                $request->only(
-                    ['manufactured', 'fuel_type', 'seat', 'registration_type',
-                        'engine_capacity', 'transmission', 'color', 'current_mileage', 'description']
-                ));
-
-            //save brand in DB
+                $request->only([
+                    'manufactured', 'fuel_type', 'seat', 'registration_type',
+                    'engine_capacity', 'transmission', 'color', 'current_mileage',
+                    'description', 'is_status', 'doors', 'power_horse',
+                ]));
 
             return redirect()->route('admin.cars')->with(['success' => __('Success Save')]);
 

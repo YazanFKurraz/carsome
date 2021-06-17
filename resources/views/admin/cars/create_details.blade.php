@@ -42,13 +42,59 @@
                         @csrf
 
                         <input type="hidden" value="{{$car->id}}" name="car_id">
+
                         <div class="card-body">
                             <div class="row">
+                                <div class="form-group col-5">
+                                    <label for="exampleSelectBorderWidth2">Type</label>
+                                    <select class="custom-select form-control-border border-width-2"
+                                            id="exampleSelectBorderWidth2"
+                                            name="is_status">
+                                        <option>select type</option>
+                                        <option value="0">User car</option>
+                                        <option value="1">New csr</option>
+                                    </select>
+                                    @error('is_status')
+                                    <span class="text-danger"> {{$message}}</span>
+                                    @enderror
+                                </div>
                                 <div class="form-group col-5">
                                     <label for="examplebrand">Create manufactured</label>
                                     <input type="text" class="form-control " name="manufactured" id="examplebrand"
                                            placeholder="Enter manufactured">
                                     @error('manufactured')
+                                    <span class="text-danger"> {{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="examplebrand">Registration Type</label>
+                                    <input type="text" class="form-control" name="registration_type" id="examplebrand"
+                                           placeholder="Enter registration type">
+                                    @error('registration_type')
+                                    <span class="text-danger"> {{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="examplebrand">Engine Capacity</label>
+                                    <input type="text" class="form-control" name="engine_capacity" id="examplebrand"
+                                           placeholder="Enter model engine_ apacity">
+                                    @error('engine_capacity')
+                                    <span class="text-danger"> {{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="examplebrand">Power Horse</label>
+                                    <input type="text" class="form-control" name="power_horse" id="examplebrand"
+                                           placeholder="Enter Current Mileage">
+                                    @error('power_horse')
+                                    <span class="text-danger"> {{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="examplebrand">Current Mileage</label>
+                                    <input type="text" class="form-control" name="current_mileage" id="examplebrand"
+                                           placeholder="Enter Current Mileage">
+                                    @error('current_mileage')
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
@@ -61,25 +107,14 @@
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group col-5">
-                                    <label for="examplebrand">Registration Type</label>
-                                    <input type="text" class="form-control" name="registration_type" id="examplebrand"
-                                           placeholder="Enter registration type">
-                                    @error('registration_type')
+                                    <label for="exampleSelectBorderWidth2">Doors</label>
+                                    <input type="number" class="form-control" name="doors" id="examplebrand"
+                                           placeholder="Enter number doors">
+                                    @error('doors')
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
-
-                                <div class="form-group col-5">
-                                    <label for="examplebrand">Engine Capacity</label>
-                                    <input type="text" class="form-control" name="engine_capacity" id="examplebrand"
-                                           placeholder="Enter model engine_ apacity">
-                                    @error('engine_capacity')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
-
                                 <div class="form-group col-5">
                                     <label for="examplebrand">Color</label>
                                     <input type="text" class="form-control" name="color" id="examplebrand"
@@ -89,15 +124,6 @@
                                     @enderror
                                 </div>
 
-
-                                <div class="form-group col-5">
-                                    <label for="examplebrand">Current Mileage</label>
-                                    <input type="text" class="form-control" name="current_mileage" id="examplebrand"
-                                           placeholder="Enter current mileage">
-                                    @error('current_mileage')
-                                    <span class="text-danger"> {{$message}}</span>
-                                    @enderror
-                                </div>
 
                                 <div class="form-group col-5">
                                     <label for="exampleSelectBorderWidth2">Fuel Type</label>
@@ -119,16 +145,16 @@
                                             id="exampleSelectBorderWidth2"
                                             name="transmission">
                                         <option>select transmission type</option>
-                                        <option value="normal">normal</option>
+                                        <option value="manual">manual</option>
                                         <option value="automatic">automatic</option>
                                     </select>
                                     @error('transmission')
                                     <span class="text-danger"> {{$message}}</span>
                                     @enderror
                                 </div>
+
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="description">Description</label>
                         </div>
@@ -146,9 +172,9 @@
 @section('script')
     <script>
         ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
-    @endsection
+@endsection

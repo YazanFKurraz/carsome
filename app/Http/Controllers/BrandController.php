@@ -100,7 +100,13 @@ class BrandController extends Controller
                 return redirect()->route('admin.brands')->with(['error' => __('Not found')]);
             }
 
-            $brand->delete();
+            $brand = Brand::with('model_car')->where('id', $id)->first();
+
+            if($brand->model_car->count() == 0){
+                $brand->delete();
+            }else{
+                return redirect()->route('admin.brands')->with(['error' => __('Error: cannot delete brand because model existence ')]);
+            }
 
             return redirect()->route('admin.brands')->with(['success' => __('Success delete')]);
 
